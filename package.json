@@ -1,0 +1,40 @@
+{
+	"name": "mmnext-auth",
+	"description": "MMNext POS Authentication Server - OpenAuth on Cloudflare Workers",
+	"cloudflare": {
+		"label": "MMNext Auth Server",
+		"products": [
+			"Workers",
+			"D1",
+			"KV"
+		],
+		"categories": [
+			"Authentication",
+			"Security"
+		],
+		"preview_icon_url": "https://auth.mmnext.app/icon.png",
+		"preview_image_url": "https://auth.mmnext.app/preview.png",
+		"publish": false
+	},
+	"dependencies": {
+		"@openauthjs/openauth": "0.4.3",
+		"hono": "^4.13.5",
+		"valibot": "1.2.0"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.4.0",
+		"typescript": "5.9.3",
+		"vitest": "^1.5.0",
+		"wrangler": "4.123.0"
+	},
+	"private": true,
+	"scripts": {
+		"cf-typegen": "wrangler types",
+		"check": "tsc && wrangler deploy --dry-run",
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"predeploy": "wrangler d1 migrations apply AUTH_DB --remote",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	}
+}
