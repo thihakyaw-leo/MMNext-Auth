@@ -141,6 +141,28 @@ button { border: 0; }
 .form-divider::before, .form-divider::after { content: ""; height: 1px; flex: 1; background: #e4e7df; }
 .help-copy { margin: 0; color: #7c877f; font-size: 12px; text-align: center; }
 .form-panel__bottom { color: #9aa39c; }
+.footer-link { color: inherit; text-decoration: none; transition: color 160ms ease; }
+.footer-link:hover { color: #2d9a4b; text-decoration: underline; text-underline-offset: 3px; }
+.footer-dot { display: inline-block; margin: 0 8px; color: #cdaa52; }
+
+.policy-shell { min-height: 100svh; background: #f5f2e9; color: #1f2e28; }
+.policy-header { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: 0 auto; padding: 28px 28px 20px; }
+.policy-back { display: inline-flex; align-items: center; gap: 8px; color: #527064; font-size: 12px; font-weight: 600; text-decoration: none; }
+.policy-back:hover { color: #1b4332; }
+.policy-brand { display: inline-flex; align-items: center; gap: 7px; color: #1b4332; font-size: 15px; letter-spacing: -.02em; }
+.policy-brand b { color: #2daa44; font-weight: 600; }
+.policy-brand-mark { display: inline-grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; background: #1b4332; color: #8be39f; font-size: 13px; font-weight: 700; }
+.policy-content { max-width: 780px; margin: 0 auto; padding: 72px 28px 100px; }
+.policy-kicker { display: inline-flex; align-items: center; gap: 7px; color: #2d9a4b; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.policy-kicker svg { color: #cdaa52; }
+.policy-content h1 { margin: 20px 0 18px; color: #1b4332; font-size: clamp(38px, 6vw, 62px); font-weight: 600; letter-spacing: -.06em; line-height: 1.05; }
+.policy-lead { max-width: 690px; margin: 0; color: #627169; font-size: 17px; line-height: 1.75; }
+.policy-updated { margin: 22px 0 65px; color: #9aa39c; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.policy-content section { padding: 28px 0; border-top: 1px solid #dfe2d8; }
+.policy-content h2 { margin: 0 0 11px; color: #1b4332; font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+.policy-content section p { max-width: 700px; margin: 0; color: #65736b; font-size: 14px; line-height: 1.9; }
+.policy-note { margin-top: 35px; padding: 17px 19px; border-left: 3px solid #cdaa52; background: #f0eee3; color: #6e776d; font-size: 12px; line-height: 1.7; }
+
 
 .callback-screen { min-height: 100svh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 20% 10%, rgba(223,242,226,.8), transparent 35%), #f5f2e9; }
 .callback-card { width: min(100%, 460px); padding: 54px 46px; border: 1px solid #e4e7df; border-radius: 20px; background: #fffdf7; text-align: center; box-shadow: 0 24px 70px rgba(27,67,50,.1); }

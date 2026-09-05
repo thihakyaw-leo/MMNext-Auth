@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "wouter";
 import { beginAuth } from "@/lib/auth";
 
 const suppliedLogo = "/manus-storage/mmnext-supplied-logo_4f4e03b5.webp";
@@ -100,7 +101,7 @@ export default function Home() {
 
         <div className="form-panel__bottom">
           <span>© 2026 MMNext POS</span>
-          <span>Privacy · Terms</span>
+          <span><Link href="/privacy" className="footer-link">Privacy</Link><span className="footer-dot">·</span><Link href="/terms" className="footer-link">Terms</Link></span>
         </div>
       </section>
     </main>
