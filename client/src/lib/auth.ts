@@ -65,4 +65,28 @@ export async function completeAuth(search: string) {
   return tokens;
 }
 
+export async function beginEmailRecovery(email: string) {
+  const redirectUri = import.meta.env.VITE_AUTH_REDIRECT_URI || `${window.location.origin}/auth/callback`;
+  const state = crypto.randomUUID();
+  const verifier = await createVerifier();
+  const challenge = await createChallenge(verifier);
+  sessionStorage.setItem("mmnext_auth_state", state);
+  sessionStorage.setItem("mmnext_auth_verifier", verifier);
+  sessionStorage.setItem("mmnext_auth_email", email);
+
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    redirect_uri: redirectUri,
+    response_type: "code",
+    scope: "openid profile email",
+    state,
+    provider: "password",
+    prompt: "login",
+    code_challenge: challenge,
+    code_challenge_method: "S256",
+    login_hint: email,
+  });
+  window.location.assign(`${AUTH_SERVER_URL}/authorize?${params.toString()}`);
+}
+
 export const authConfig = { issuer: AUTH_SERVER_URL, clientId: CLIENT_ID };

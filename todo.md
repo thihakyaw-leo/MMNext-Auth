@@ -1,8 +1,8 @@
-# Privacy and Terms update
+# Password reset update
 
-- [x] Add clickable Privacy Policy and Terms of Service links to the login footer.
-- [x] Add readable Privacy Policy content page with MMNext POS data-handling sections.
-- [x] Add readable Terms of Service content page with account and acceptable-use sections.
-- [x] Add back-to-login navigation and responsive policy-page styling.
+- [x] Add a clear forgot-password dialog from the login form.
+- [x] Add email validation, loading, success, and error states.
+- [x] Connect the reset request to the configurable MMNext-Auth reset endpoint.
+- [x] Add a reset-password callback route for code/token handoff.
 - [x] Run TypeScript/build checks and capture updated screenshots.
-- [ ] Save a new project checkpoint and deliver the updated version.
+- [ ] Save a new checkpoint and deliver the updated version.

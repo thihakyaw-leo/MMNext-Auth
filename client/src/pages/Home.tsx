@@ -1,9 +1,9 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
 import { useState } from "react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
-import { beginAuth } from "@/lib/auth";
+import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
 const suppliedLogo = "/manus-storage/mmnext-supplied-logo_4f4e03b5.webp";
 const generatedMark = "/manus-storage/mmnext-mark_dba1f31e.png";
@@ -15,6 +15,24 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showReset, setShowReset] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [isResetting, setIsResetting] = useState(false);
+
+  const handleReset = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!resetEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resetEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setIsResetting(true);
+    try {
+      await beginEmailRecovery(resetEmail.trim());
+    } catch {
+      setIsResetting(false);
+      toast.error("We could not start email recovery. Please try again.");
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -78,7 +96,7 @@ export default function Home() {
 
             <div className="password-label-row">
               <label className="field-label" htmlFor="password">Password</label>
-              <button type="button" className="text-action" onClick={() => toast.info("Password recovery will open from your Auth Server.")}>Forgot password?</button>
+              <button type="button" className="text-action" onClick={() => { setResetEmail(email); setShowReset(true); }}>Forgot password?</button>
             </div>
             <div className="field-shell">
               <LockKeyhole size={18} aria-hidden="true" />
@@ -104,6 +122,23 @@ export default function Home() {
           <span><Link href="/privacy" className="footer-link">Privacy</Link><span className="footer-dot">·</span><Link href="/terms" className="footer-link">Terms</Link></span>
         </div>
       </section>
+
+      {showReset && (
+        <div className="reset-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setShowReset(false); }}>
+          <section className="reset-dialog" role="dialog" aria-modal="true" aria-labelledby="reset-title">
+            <button className="reset-close" type="button" aria-label="Close password recovery" onClick={() => setShowReset(false)}><X size={18} /></button>
+            <div className="form-eyebrow"><ShieldCheck size={14} /> Account recovery</div>
+            <h2 id="reset-title">Get a new sign-in code</h2>
+            <p>MMNext Auth uses a secure email verification code instead of a stored password. Enter your account email and we’ll continue the recovery flow.</p>
+            <form className="reset-form" onSubmit={handleReset}>
+              <label className="field-label" htmlFor="reset-email">Email address</label>
+              <div className="field-shell"><Mail size={18} aria-hidden="true" /><input id="reset-email" type="email" autoComplete="email" placeholder="you@business.com" value={resetEmail} onChange={(event) => setResetEmail(event.target.value)} autoFocus /></div>
+              <button className="submit-button" type="submit" disabled={isResetting}><span>{isResetting ? "Opening secure recovery…" : "Email me a sign-in code"}</span>{isResetting ? <span className="button-spinner" /> : <ArrowRight size={18} />}</button>
+            </form>
+            <p className="reset-note">If you don’t receive the email, check your spam folder or contact your workspace administrator.</p>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
