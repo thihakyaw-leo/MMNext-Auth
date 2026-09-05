@@ -1,7 +1,12 @@
-# Monywa visual update
+# Full-stack and File Storage upgrade
 
-- [x] Generate a restrained Monywa standing-Buddha visual aligned to the Green Ledger palette.
-- [x] Replace the current brand-panel background art with the new visual asset.
-- [x] Verify text contrast and composition on desktop and mobile.
-- [x] Run TypeScript/build checks and capture preview screenshots.
-- [ ] Save a new project checkpoint and report the change.
+- [x] Upgrade the static project to web-db-user full-stack scaffolding.
+- [x] Inspect the generated storage helpers, database schema, and tRPC contracts.
+- [x] Define the file metadata model and protected storage procedures.
+- [x] Add the frontend upload and file-list management experience.
+- [x] Run migrations, type checks, tests, and production build.
+- [x] Save a new checkpoint and document required setup variables.
+
+- [x] Replace base64 conversion with a chunk-safe encoder for files near 8 MB.
+- [x] Add explicit list-query error state to the File Storage page.
+- [x] Browser-test the File Storage upload and failure states after the safer encoding fix.

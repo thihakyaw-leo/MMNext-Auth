@@ -7,13 +7,15 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import AuthCallback from "./pages/AuthCallback";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import FileStorage from "./pages/FileStorage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/files" component={FileStorage} />
       <Route path="/login" component={Home} />
       <Route path="/auth/callback" component={AuthCallback} />
       <Route path="/privacy" component={PrivacyPolicy} />

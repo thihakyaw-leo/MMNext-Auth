@@ -1,6 +1,6 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
 import { useState } from "react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowRight, CloudUpload, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/lib/auth";
@@ -76,7 +76,7 @@ export default function Home() {
             <img src={suppliedLogo} alt="MMNext POS" />
             <span>MMNext <b>POS</b></span>
           </div>
-          <span className="secure-label"><ShieldCheck size={15} /> Secure workspace</span>
+          <div className="form-panel__top-actions"><Link href="/files" className="storage-nav-link"><CloudUpload size={15} /> Files</Link><span className="secure-label"><ShieldCheck size={15} /> Secure workspace</span></div>
         </div>
 
         <div className="form-column">
