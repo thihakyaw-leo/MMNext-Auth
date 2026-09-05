@@ -1,0 +1,39 @@
+# MMNext POS · Green Ledger deployment pipeline
+# Required Bitbucket Repository Variables:
+# CLOUDFLARE_API_TOKEN — Pages deployment token
+# CLOUDFLARE_ACCOUNT_ID — Cloudflare account ID
+# CLOUDFLARE_PAGES_PROJECT — existing Cloudflare Pages project name
+# VITE_AUTH_SERVER_URL — e.g. https://auth.your-domain.com
+# VITE_MMNEXT_CLIENT_ID — OAuth client ID registered in MMNext Auth
+# VITE_AUTH_REDIRECT_URI — e.g. https://pos.your-domain.com/auth/callback
+
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and deploy MMNext POS Login
+          caches:
+            - node
+          script:
+            - corepack enable
+            - corepack prepare pnpm@10.4.1 --activate
+            - pnpm install --frozen-lockfile
+            - pnpm build
+            - npx wrangler@latest pages deploy dist/public --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main
+          artifacts:
+            - dist/**
+
+  pull-requests:
+    '**':
+      - step:
+          name: Validate MMNext POS Login
+          caches:
+            - node
+          script:
+            - corepack enable
+            - corepack prepare pnpm@10.4.1 --activate
+            - pnpm install --frozen-lockfile
+            - pnpm check
+            - pnpm build
