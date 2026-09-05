@@ -6,7 +6,6 @@ import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
 const suppliedLogo = "/manus-storage/mmnext-supplied-logo_4f4e03b5.webp";
-const generatedMark = "/manus-storage/mmnext-mark_dba1f31e.png";
 const panelArt = "/manus-storage/mmnext-login-panel-art_e9d498db.png";
 const motif = "/manus-storage/mmnext-brand-motif_e8d3fa56.png";
 
@@ -74,7 +73,7 @@ export default function Home() {
       <section className="form-panel" aria-label="Sign in to MMNext POS">
         <div className="form-panel__topbar">
           <div className="compact-brand">
-            <img src={generatedMark} alt="" aria-hidden="true" />
+            <img src={suppliedLogo} alt="MMNext POS" />
             <span>MMNext <b>POS</b></span>
           </div>
           <span className="secure-label"><ShieldCheck size={15} /> Secure workspace</span>
