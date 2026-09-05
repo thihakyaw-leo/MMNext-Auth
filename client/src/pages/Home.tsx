@@ -6,7 +6,7 @@ import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
 const suppliedLogo = "/manus-storage/mmnext-supplied-logo_4f4e03b5.webp";
-const panelArt = "/manus-storage/mmnext-login-panel-art_e9d498db.png";
+const panelArt = "/manus-storage/mmnext-monywa-standing-buddha_94e9aef3.png";
 const motif = "/manus-storage/mmnext-brand-motif_e8d3fa56.png";
 
 export default function Home() {

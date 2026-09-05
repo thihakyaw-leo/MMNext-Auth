@@ -1,7 +1,7 @@
-# Visual edit verification
+# Monywa visual update
 
-- [x] Inspect the reported Home.tsx image target near line 77.
-- [x] Determine whether the flagged image is incorrect or already correct.
-- [x] Apply a targeted fix only if the image source or presentation is wrong.
-- [x] Run TypeScript/build checks and preview QA.
-- [ ] Save a new project checkpoint and report the verification result.
+- [x] Generate a restrained Monywa standing-Buddha visual aligned to the Green Ledger palette.
+- [x] Replace the current brand-panel background art with the new visual asset.
+- [x] Verify text contrast and composition on desktop and mobile.
+- [x] Run TypeScript/build checks and capture preview screenshots.
+- [ ] Save a new project checkpoint and report the change.
