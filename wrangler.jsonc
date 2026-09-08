@@ -28,7 +28,7 @@
   "r2_buckets": [
     {
       "binding": "FILES",
-      "bucket_name": "mmnext-pos-files"
+      "bucket_name": "mmnext"
     }
   ]
 }
