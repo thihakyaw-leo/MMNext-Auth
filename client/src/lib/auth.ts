@@ -43,6 +43,19 @@ export async function beginAuth({ email }: Credentials) {
   window.location.assign(`${AUTH_SERVER_URL}/authorize?${params.toString()}`);
 }
 
+export async function beginRegistration({ email, fullName, businessName }: { email: string; fullName: string; businessName: string }) {
+  const redirectUri = import.meta.env.VITE_AUTH_REDIRECT_URI || `${window.location.origin}/auth/callback`;
+  const state = crypto.randomUUID();
+  const verifier = await createVerifier();
+  const challenge = await createChallenge(verifier);
+  sessionStorage.setItem("mmnext_auth_state", state);
+  sessionStorage.setItem("mmnext_auth_verifier", verifier);
+  sessionStorage.setItem("mmnext_auth_email", email);
+  sessionStorage.setItem("mmnext_auth_registration", JSON.stringify({ fullName, businessName }));
+  const params = new URLSearchParams({ client_id: CLIENT_ID, redirect_uri: redirectUri, response_type: "code", scope: "openid profile email", state, code_challenge: challenge, code_challenge_method: "S256", login_hint: email, prompt: "signup" });
+  window.location.assign(`${AUTH_SERVER_URL}/authorize?${params.toString()}`);
+}
+
 export async function completeAuth(search: string) {
   const params = new URLSearchParams(search);
   const code = params.get("code");

@@ -186,7 +186,7 @@ export default function Home() {
           </form>
 
           <div className="form-divider"><span>{t.protected}</span></div>
-          <p className="help-copy">{t.needAccount} <button type="button" className="text-action" onClick={() => toast.info(t.askAdmin)}>{t.contactAdmin}</button></p>
+          <p className="help-copy">{t.needAccount} <Link href="/register" className="text-action">{t.contactAdmin}</Link></p>
         </div>
 
         <div className="form-panel__bottom">
