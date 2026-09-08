@@ -1,5 +1,5 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, CloudUpload, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
@@ -82,6 +82,7 @@ const copy = {
 export default function Home() {
   const [language, setLanguage] = useState<Language>("my");
   const t = copy[language];
+  useEffect(() => { document.title = "Login"; }, []);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState("");
