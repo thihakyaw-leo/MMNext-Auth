@@ -7,7 +7,6 @@ import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
 const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
 const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
-const panelArt = `${R2_ASSET_BASE}/mmnext-app-icon.png?v=4x-20260908`;
 const motif = `${R2_ASSET_BASE}/mmnext-app-icon.png?v=4x-20260908`;
 
 export default function Home() {
@@ -53,7 +52,6 @@ export default function Home() {
     <main className="login-shell">
       <section className="brand-panel" aria-label="MMNext POS introduction">
         <div className="brand-panel__texture" />
-        <img className="brand-panel__art" src={panelArt} alt="" aria-hidden="true" />
         <div className="brand-panel__content">
           <div className="brand-chip"><span className="brand-chip__dot" /> Myanmar Business Software</div>
           <div className="brand-mark-wrap">
