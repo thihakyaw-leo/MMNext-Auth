@@ -10,3 +10,14 @@
 - [x] Replace base64 conversion with a chunk-safe encoder for files near 8 MB.
 - [x] Add explicit list-query error state to the File Storage page.
 - [x] Browser-test the File Storage upload and failure states after the safer encoding fix.
+
+- [ ] Verify the target GitHub remote, current branch, and working tree before pushing.
+- [ ] Confirm secrets and generated files are excluded from the commit.
+- [ ] Commit the current MMNext POS full-stack project and push it to the requested repository.
+- [ ] Verify the remote branch and report the push result.
+- [x] Confirm whether to push the POS app to a new branch or replace/merge the existing Auth Server main branch.
+
+- [x] Confirm Cloudflare build/runtime requirements for the full-stack project.
+- [x] Add Cloudflare deployment configuration and a detailed deployment guide.
+- [x] Commit all current changes and force-push this project to GitHub main, replacing the old Auth Server.
+- [x] Verify GitHub main and document final Cloudflare environment variables and OAuth callback steps.

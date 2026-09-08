@@ -46,3 +46,61 @@ Before using `/files` in production, verify that Manus OAuth is configured and t
 | `BUILT_IN_FORGE_API_KEY` | Platform-provided | Server-side authorization for built-in storage. |
 
 Do not commit `.env` files or manually expose server-side storage credentials. Configure the OAuth callback to include the deployed `/api/oauth/callback` URL, then open `/files` after authentication. The File Storage screen uses the platform-provided storage helpers and does not require a separate S3 bucket or access key.
+
+
+## Cloudflare deployment guide
+
+### Recommended architecture
+
+The browser bundle can be deployed to Cloudflare Pages from the GitHub `main` branch. The full-stack server bundle must remain available at a server runtime because it provides Express, tRPC, Manus OAuth callback handling, Drizzle/MySQL access, and the built-in storage proxy. Set `VITE_API_BASE_URL` to that backend origin so the Pages frontend sends `/api/trpc` traffic to the full-stack server. Cloudflare Pages is not a drop-in replacement for the current MySQL-backed Express runtime without a separate Workers adapter and database migration.
+
+Cloudflare’s Git integration supports GitHub repositories and can automatically deploy pushes to the selected production branch. The Pages build settings for the frontend are:
+
+| Setting | Value |
+|---|---|
+| Framework preset | React (Vite) or None |
+| Root directory | `/` |
+| Build command | `pnpm build` |
+| Build output directory | `dist/public` |
+| Production branch | `main` |
+| Node version | `22` |
+
+The repository includes `wrangler.pages.toml` and a Bitbucket pipeline that deploys `dist/public` with Wrangler. Cloudflare Pages also supports the same output directory through the dashboard’s Git integration settings. The build directory and command convention are consistent with Cloudflare’s React/Vite guidance [1].
+
+### Cloudflare Pages environment variables
+
+Set these in **Workers & Pages → your Pages project → Settings → Environment variables** for both Preview and Production where applicable:
+
+| Variable | Example | Purpose |
+|---|---|---|
+| `VITE_AUTH_SERVER_URL` | `https://auth.example.com` | MMNext-Auth authorization and token endpoint. |
+| `VITE_MMNEXT_CLIENT_ID` | `mmnext-pos-web` | OAuth client registered with MMNext-Auth. |
+| `VITE_AUTH_REDIRECT_URI` | `https://pos.example.com/auth/callback` | Exact OAuth callback used by the deployed frontend. |
+| `VITE_API_BASE_URL` | `https://api.example.com` | Full-stack server origin for tRPC requests. |
+
+Do not put `DATABASE_URL`, `JWT_SECRET`, `BUILT_IN_FORGE_API_KEY`, or other server-only secrets into Pages `VITE_*` variables. Configure those on the backend runtime as encrypted secrets/environment variables. Cloudflare’s documentation recommends secrets rather than plaintext variables for sensitive values [2].
+
+### GitHub Pages setup
+
+1. Open **Cloudflare Dashboard → Workers & Pages → Create application → Pages → Connect to Git**.
+2. Authorize GitHub and select `thihakyaw-leo/MMNext-Auth`.
+3. Select `main` as the production branch.
+4. Use the build settings shown above and add the four `VITE_*` variables.
+5. Save and deploy. Every subsequent push to `main` will trigger a production deployment; other branches can be used for preview deployments [3].
+6. Add the final Pages domain to the MMNext-Auth client’s allowed redirect URIs. The callback must match the deployed URL exactly, including `/auth/callback`.
+7. Add the custom domain under **Pages → Custom domains**, then update the OAuth redirect URI and `VITE_AUTH_REDIRECT_URI` to the custom domain.
+
+### Bitbucket pipeline setup
+
+If Bitbucket remains the deployment runner, add `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PAGES_PROJECT`, `VITE_AUTH_SERVER_URL`, `VITE_MMNEXT_CLIENT_ID`, `VITE_AUTH_REDIRECT_URI`, and `VITE_API_BASE_URL` as repository variables. The existing `bitbucket-pipelines.yml` installs dependencies, builds the project, and runs `wrangler pages deploy dist/public --config wrangler.pages.toml` on `main`.
+
+### Backend requirements
+
+The full-stack API origin must serve the following paths over HTTPS: `/api/trpc`, `/api/oauth/callback`, `/manus-storage/*`, and the production frontend fallback/static route if it also serves the application. It must allow the Pages origin in CORS/session configuration and must use a production `DATABASE_URL`, `JWT_SECRET`, `BUILT_IN_FORGE_API_URL`, and `BUILT_IN_FORGE_API_KEY`. Cloudflare Workers can run Express with the `nodejs_compat` flag, but converting this MySQL-backed server to Workers requires an explicit adapter and a compatible database strategy; the current repository does not silently claim that conversion [4].
+
+### References
+
+[1]: https://developers.cloudflare.com/pages/configuration/build-configuration/ "Cloudflare Pages build configuration"
+[2]: https://developers.cloudflare.com/workers/configuration/environment-variables/ "Cloudflare Workers environment variables and secrets"
+[3]: https://developers.cloudflare.com/pages/get-started/git-integration/ "Cloudflare Pages Git integration"
+[4]: https://developers.cloudflare.com/workers/tutorials/deploy-an-express-app/ "Deploy an Express.js application on Cloudflare Workers"

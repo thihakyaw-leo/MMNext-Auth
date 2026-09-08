@@ -6,6 +6,7 @@
 # VITE_AUTH_SERVER_URL — e.g. https://auth.your-domain.com
 # VITE_MMNEXT_CLIENT_ID — OAuth client ID registered in MMNext Auth
 # VITE_AUTH_REDIRECT_URI — e.g. https://pos.your-domain.com/auth/callback
+# VITE_API_BASE_URL — full-stack backend base URL, e.g. https://api.your-domain.com
 
 image: node:22
 
@@ -21,7 +22,7 @@ pipelines:
             - corepack prepare pnpm@10.4.1 --activate
             - pnpm install --frozen-lockfile
             - pnpm build
-            - npx wrangler@latest pages deploy dist/public --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main
+            - npx wrangler@latest pages deploy dist/public --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main --config wrangler.pages.toml
           artifacts:
             - dist/**
 

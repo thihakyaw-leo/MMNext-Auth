@@ -1,0 +1,9 @@
+# Cloudflare deployment notes
+
+Cloudflare Pages Git integration supports GitHub repositories and automatically builds/deploys pushes; the production branch is normally `main`, while other branches can receive preview deployments. Pages setup requires a project name, root directory, build command, output directory, and environment variables. Official docs: https://developers.cloudflare.com/pages/get-started/git-integration/ and https://developers.cloudflare.com/pages/configuration/build-configuration/.
+
+This project is not a static-only Vite app after the full-stack upgrade. Its `pnpm build` creates both the Vite browser bundle under `dist/public` and an Express/tRPC server bundle under `dist/index.js`; therefore Pages static hosting alone is not sufficient for the full server behavior. Cloudflare Workers can run Express with the `nodejs_compat` compatibility flag, but the application needs an explicit Workers adapter/configuration before it can be deployed as a Worker. Official Express-on-Workers reference: https://developers.cloudflare.com/workers/tutorials/deploy-an-express-app/.
+
+Cloudflare environment variables and secrets are configured under Workers & Pages settings. Sensitive values should be stored as secrets rather than plaintext variables. The project must not commit `.env` or `.dev.vars` files. Official reference: https://developers.cloudflare.com/workers/configuration/environment-variables/.
+
+Deployment decision for this project: prepare the GitHub main branch and a Cloudflare setup guide, but do not claim the full-stack server is deployable to Pages static hosting without an adapter. The current app can be deployed as static frontend assets with `pnpm build` and `dist/public`, but auth, tRPC, database, and File Storage require a server runtime and platform environment configuration.
