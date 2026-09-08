@@ -130,7 +130,7 @@ export default function Home() {
           <div className="brand-panel__identity">
             <img className="brand-panel__logo" src={suppliedLogo} alt="MMNext POS logo" />
             <div className="brand-panel__wordmark" aria-label="MMNext POS">
-              <span>MMNext</span>
+              <span><i className="brand-mm">MM</i>Next</span>
               <strong>POS</strong>
             </div>
           </div>

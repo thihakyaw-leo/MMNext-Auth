@@ -46,7 +46,7 @@ export default function Register() {
       <div className="brand-panel__texture" />
       <div className="register-brand-lockup">
         <div className="brand-chip"><span className="brand-chip__dot" /> {t.chip}</div>
-        <div className="brand-panel__identity"><img className="brand-panel__logo" src={suppliedLogo} alt="MMNext POS logo" /><div className="brand-panel__wordmark"><span>MMNext</span><strong>POS</strong></div></div>
+        <div className="brand-panel__identity"><img className="brand-panel__logo" src={suppliedLogo} alt="MMNext POS logo" /><div className="brand-panel__wordmark"><span><i className="brand-mm">MM</i>Next</span><strong>POS</strong></div></div>
         <div className="brand-panel__rule" />
         <p className="brand-panel__slogan">{language === "my" ? "အရောင်းတစ်ချက်၊ စာရင်းတစ်ချက် —" : "One sale, one record —"}<br />{language === "my" ? "လုပ်ငန်းတစ်ခုလုံးကို MMNext-POS နဲ့ ထိန်းချုပ်" : "control your whole business with MMNext-POS"}</p>
         <p className="brand-panel__english">SIMPLE · RELIABLE · TRUSTED</p>
