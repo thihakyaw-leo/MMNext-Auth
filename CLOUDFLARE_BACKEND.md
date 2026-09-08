@@ -32,9 +32,20 @@ The SQL migration is in `migrations/0001_cloudflare_d1.sql`. It creates `users`,
 
 ## Runtime behavior
 
-`server/db.ts` uses D1 prepared statements for user upserts, user lookup, file metadata insertion, and file listing. `server/storage.ts` writes file bytes to R2 and returns `/storage/<encoded-key>` URLs. If Cloudflare bindings are unavailable, those modules fall back to the existing MySQL and Manus storage implementations for local development.
+`backend/db.ts` uses D1 prepared statements for user upserts, user lookup, file metadata insertion, and file listing. `backend/storage.ts` writes file bytes to R2 and returns `/storage/<encoded-key>` URLs. If Cloudflare bindings are unavailable, those modules fall back to the existing MySQL and Manus storage implementations for local development.
 
-The `server/_core/cloudflare.ts` module defines the small binding surface used by the application and provides KV helpers (`cacheGet`, `cachePut`, `cacheDelete`). A Cloudflare adapter should set the request-scoped environment with `setCloudflareEnv({ DB: env.DB, CACHE: env.CACHE, FILES: env.FILES })` before invoking tRPC handlers.
+The `backend/_core/cloudflare.ts` module defines the small binding surface used by the application and provides KV helpers (`cacheGet`, `cachePut`, `cacheDelete`). The root `worker.ts` sets the request-scoped environment with `setCloudflareEnv({ DB: env.DB, CACHE: env.CACHE, FILES: env.FILES })` before invoking tRPC handlers.
+
+## Root deployment
+
+From the project root, install and build with npm, then deploy directly through the root Wrangler configuration:
+
+```bash
+npm ci
+npm run check
+npm run build
+npx wrangler deploy --config wrangler.jsonc --name mmnext-auth --keep-vars
+```
 
 ## Security notes
 

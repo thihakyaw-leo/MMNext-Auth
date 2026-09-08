@@ -1,4 +1,4 @@
-import type { D1Database, R2Bucket, KVNamespaceLike } from "./server/_core/cloudflare";
+import type { D1Database, R2Bucket, KVNamespaceLike } from "./backend/_core/cloudflare";
 
 declare global {
   interface Env {

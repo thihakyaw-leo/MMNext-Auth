@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, CloudUpload, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
-import { beginAuth, beginEmailRecovery } from "@/lib/auth";
+import { beginAuth, beginEmailRecovery } from "@/Auth/auth";
 
 const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
 const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
@@ -15,6 +15,7 @@ const copy = {
     brandStyle: "Myanmar Business Style",
     sloganLine1: "အရောင်းတစ်ချက်၊ စာရင်းတစ်ချက် —",
     sloganLine2: "လုပ်ငန်းတစ်ခုလုံးကို MMNext-POS နဲ့ ထိန်းချုပ်",
+    docs: "အသုံးပြုလမ်းညွှန်",
     files: "ဖိုင်များ",
     secure: "လုံခြုံသော workspace",
     welcome: "ပြန်လည်ကြိုဆိုပါတယ်",
@@ -48,6 +49,7 @@ const copy = {
     brandStyle: "Myanmar Business Style",
     sloganLine1: "One sale, one record —",
     sloganLine2: "control your whole business with MMNext-POS",
+    docs: "Docs",
     files: "Files",
     secure: "Secure workspace",
     welcome: "Welcome back",
@@ -149,7 +151,7 @@ export default function Home() {
             <img src={suppliedLogo} alt="MMNext POS" />
             <span>MMNext <b>POS</b></span>
           </div>
-          <div className="form-panel__top-actions"><Link href="/files" className="storage-nav-link"><CloudUpload size={15} /> {t.files}</Link><span className="secure-label"><ShieldCheck size={15} /> {t.secure}</span><div className="language-switch" role="group" aria-label={t.languageLabel}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
+          <div className="form-panel__top-actions"><Link href="/docs" className="storage-nav-link">{t.docs}</Link><Link href="/files" className="storage-nav-link"><CloudUpload size={15} /> {t.files}</Link><span className="secure-label"><ShieldCheck size={15} /> {t.secure}</span><div className="language-switch" role="group" aria-label={t.languageLabel}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
         </div>
 
         <div className="form-column">

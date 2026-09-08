@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, LoaderCircle, ShieldAlert } from "lucide-react";
 import { Link } from "wouter";
-import { completeAuth } from "@/lib/auth";
+import { completeAuth } from "@/Auth/auth";
 
 export default function AuthCallback() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");

@@ -4,12 +4,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import AuthCallback from "./pages/AuthCallback";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
+import AuthCallback from "./Auth/AuthCallback";
+import PrivacyPolicy from "./Docs/PrivacyPolicy";
+import TermsOfService from "./Docs/TermsOfService";
+import Docs from "./Docs/Docs";
 import FileStorage from "./pages/FileStorage";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
+import Home from "./Login/Login";
+import Register from "./Register/Register";
 import NotFound from "./pages/NotFound";
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/files" component={FileStorage} />
       <Route path="/login" component={Home} />
       <Route path="/register" component={Register} />
+      <Route path="/docs" component={Docs} />
       <Route path="/auth/callback" component={AuthCallback} />
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />

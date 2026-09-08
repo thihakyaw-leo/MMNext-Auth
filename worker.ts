@@ -1,7 +1,7 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { appRouter } from "./server/routers";
-import { createContext } from "./server/_core/context";
-import { setCloudflareEnv, type CloudflareEnv } from "./server/_core/cloudflare";
+import { appRouter } from "./backend/routers";
+import { createContext } from "./backend/_core/context";
+import { setCloudflareEnv, type CloudflareEnv } from "./backend/_core/cloudflare";
 
 interface WorkerEnv extends CloudflareEnv {
   ASSETS: { fetch(request: Request): Promise<Response> };

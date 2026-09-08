@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
-import { beginRegistration } from "@/lib/auth";
+import { beginRegistration } from "@/Auth/auth";
 
 const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
 const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
