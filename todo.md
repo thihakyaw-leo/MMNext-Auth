@@ -21,3 +21,7 @@
 - [x] Add Cloudflare deployment configuration and a detailed deployment guide.
 - [x] Commit all current changes and force-push this project to GitHub main, replacing the old Auth Server.
 - [x] Verify GitHub main and document final Cloudflare environment variables and OAuth callback steps.
+
+- [x] Add explicit Cloudflare Workers assets configuration to prevent Wrangler auto-setup failure.
+- [x] Remove undefined analytics placeholders from the production HTML build.
+- [x] Re-run Cloudflare-compatible build validation and update deployment instructions.

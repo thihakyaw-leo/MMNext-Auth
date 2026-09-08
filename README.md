@@ -104,3 +104,10 @@ The full-stack API origin must serve the following paths over HTTPS: `/api/trpc`
 [2]: https://developers.cloudflare.com/workers/configuration/environment-variables/ "Cloudflare Workers environment variables and secrets"
 [3]: https://developers.cloudflare.com/pages/get-started/git-integration/ "Cloudflare Pages Git integration"
 [4]: https://developers.cloudflare.com/workers/tutorials/deploy-an-express-app/ "Deploy an Express.js application on Cloudflare Workers"
+
+
+### Cloudflare Workers configuration from build logs
+
+If the Cloudflare project is configured as a **Worker** rather than a Pages project, use the repository’s `wrangler.jsonc` explicitly. It defines the Worker name `mmnext-pos`, the `nodejs_compat` compatibility flag, SPA fallback handling, and the `dist/public` asset directory. This prevents Wrangler from attempting an interactive Vite auto-setup during a non-interactive deployment. The Worker asset configuration deploys the browser frontend; the Express/tRPC/MySQL backend still needs a compatible server runtime and must be exposed through `VITE_API_BASE_URL`.
+
+The build log’s analytics warnings were caused by optional `%VITE_ANALYTICS_ENDPOINT%` and `%VITE_ANALYTICS_WEBSITE_ID%` placeholders. They have been removed from `client/index.html`, so those variables are no longer required for a clean Cloudflare build.
