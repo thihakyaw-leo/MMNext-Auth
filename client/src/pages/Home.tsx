@@ -7,7 +7,6 @@ import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
 const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
 const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
-const motif = `${R2_ASSET_BASE}/mmnext-app-icon.png?v=4x-20260908`;
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,15 +51,18 @@ export default function Home() {
     <main className="login-shell">
       <section className="brand-panel" aria-label="MMNext POS introduction">
         <div className="brand-panel__texture" />
-        <div className="brand-panel__content">
-          <div className="brand-chip"><span className="brand-chip__dot" /> Myanmar Business Software</div>
-          <div className="brand-mark-wrap">
-            <img className="brand-mark" src={suppliedLogo} alt="MMNext POS logo" />
+        <div className="brand-panel__lockup">
+          <div className="brand-chip"><span className="brand-chip__dot" /> Myanmar Business Style</div>
+          <div className="brand-panel__identity">
+            <img className="brand-panel__logo" src={suppliedLogo} alt="MMNext POS logo" />
+            <div className="brand-panel__wordmark" aria-label="MMNext POS">
+              <span>MMNext</span>
+              <strong>POS</strong>
+            </div>
           </div>
-          <p className="brand-kicker">Simple · Reliable · Trusted</p>
-          <h1>Your counter, ready<br /><em>when you are.</em></h1>
-          <p className="brand-copy">A focused workspace for sales, stock, and the everyday decisions that keep your business moving.</p>
-          <div className="brand-rule"><span /> <img src={motif} alt="" aria-hidden="true" /> <span /></div>
+          <div className="brand-panel__rule" aria-hidden="true" />
+          <p className="brand-panel__slogan">အရောင်းတစ်ချက်၊ စာရင်းတစ်ချက် —<br />လုပ်ငန်းတစ်ခုလုံးကို <strong>MMNext-POS</strong> နဲ့ ထိန်းချုပ်</p>
+          <p className="brand-panel__english">SIMPLE · RELIABLE · TRUSTED</p>
         </div>
         <div className="brand-panel__footer">
           <span>MMNext POS</span>

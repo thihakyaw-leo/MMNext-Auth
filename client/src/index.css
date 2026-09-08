@@ -89,18 +89,18 @@ button { border: 0; }
 .brand-panel { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 72px); color: #f6fbf6; background: #1b4332; isolation: isolate; }
 .brand-panel::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 85% 10%, rgba(108,214,138,.25), transparent 30%), linear-gradient(145deg, #0d3225 0%, #1b4332 52%, #125032 100%); }
 .brand-panel__texture { position: absolute; inset: 0; z-index: -1; opacity: .34; background-image: linear-gradient(135deg, rgba(7,43,31,.52), rgba(27,67,50,.08)), url("https://cloud.kaungthant.shop/mmnext-auth/mmnext-monywa-background.png?v=monywa-20260908"); background-size: cover; background-position: center; mix-blend-mode: screen; }
-.brand-panel__content { position: relative; max-width: 530px; margin: auto 0; padding: 5vh 0 4vh; }
-.brand-chip { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(231,245,229,.24); background: rgba(5,34,24,.27); border-radius: 999px; padding: 8px 13px; color: #e4f1e5; font-size: 11px; font-weight: 600; letter-spacing: .105em; text-transform: uppercase; }
+.brand-panel__lockup { position: relative; z-index: 1; width: min(100%, 610px); margin: auto 0; padding: clamp(24px, 4vw, 48px) clamp(20px, 4vw, 54px); border: 1px solid rgba(231,245,229,.2); border-radius: 28px; background: linear-gradient(145deg, rgba(4,34,24,.72), rgba(8,57,39,.42)); box-shadow: 0 24px 70px rgba(2,25,16,.24); backdrop-filter: blur(3px); }
+.brand-chip { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(231,245,229,.24); background: rgba(5,34,24,.45); border-radius: 999px; padding: 8px 13px; color: #e4f1e5; font-size: 11px; font-weight: 600; letter-spacing: .105em; text-transform: uppercase; }
 .brand-chip__dot { width: 7px; height: 7px; border-radius: 50%; background: #6cd68a; box-shadow: 0 0 0 4px rgba(108,214,138,.15); }
-.brand-mark-wrap { margin-top: clamp(42px, 8vh, 90px); width: clamp(128px, 16vw, 184px); aspect-ratio: 1; border-radius: 30px; background: #fff8e8; padding: 12px; box-shadow: 0 20px 54px rgba(2,25,16,.22); }
-.brand-mark { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
-.brand-kicker { margin: 27px 0 16px; color: #9ae6ab; font-size: 12px; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
-.brand-panel h1 { margin: 0; max-width: 560px; color: #f4f8ed; font-size: clamp(38px, 5vw, 70px); font-weight: 600; letter-spacing: -.055em; line-height: 1.04; }
-.brand-panel h1 em { color: #73db91; font-style: normal; }
-.brand-copy { max-width: 410px; margin: 26px 0 0; color: rgba(235,247,235,.7); font-size: 14px; line-height: 1.85; }
-.brand-rule { display: flex; align-items: center; gap: 14px; max-width: 320px; margin-top: 34px; }
-.brand-rule span { height: 1px; flex: 1; background: rgba(193,220,188,.3); }
-.brand-rule img { width: 38px; height: 20px; object-fit: contain; opacity: .75; filter: brightness(2); }
+.brand-panel__identity { display: flex; align-items: center; gap: clamp(16px, 3vw, 32px); margin-top: 30px; }
+.brand-panel__logo { width: clamp(96px, 12vw, 148px); aspect-ratio: 1; object-fit: cover; border-radius: 24px; background: #fff8e8; box-shadow: 0 16px 40px rgba(2,25,16,.24); }
+.brand-panel__wordmark { display: flex; flex-direction: column; color: #f7f5e9; font-size: clamp(40px, 5vw, 72px); font-weight: 600; letter-spacing: -.075em; line-height: .82; }
+.brand-panel__wordmark span::first-letter { color: #79d990; }
+.brand-panel__wordmark strong { margin: 12px 0 0 8px; color: #70da8d; font-size: .55em; font-weight: 600; letter-spacing: .16em; }
+.brand-panel__rule { width: min(100%, 250px); height: 2px; margin: 26px 0 18px; background: linear-gradient(90deg, #70da8d, rgba(112,218,141,.1)); }
+.brand-panel__slogan { margin: 0; color: #f4f8ed; font-family: "Noto Sans Myanmar", "Poppins", system-ui, sans-serif; font-size: clamp(18px, 2vw, 27px); font-weight: 600; line-height: 1.65; text-wrap: balance; }
+.brand-panel__slogan strong { color: #79e197; }
+.brand-panel__english { margin: 20px 0 0; color: #9ae6ab; font-size: 11px; font-weight: 600; letter-spacing: .25em; }
 .brand-panel__footer, .form-panel__bottom { display: flex; justify-content: space-between; align-items: center; color: rgba(235,247,235,.55); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
 .footer-divider { width: 4px; height: 4px; border-radius: 50%; background: #cdaa52; }
 .form-panel { position: relative; min-height: 100svh; display: flex; flex-direction: column; padding: clamp(24px, 4.5vw, 64px) clamp(26px, 8vw, 126px) 28px; background: #fffdf7; }
@@ -232,5 +232,5 @@ button { border: 0; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
-@media (max-width: 860px) { .storage-content { padding-top: 54px; } .storage-grid { grid-template-columns: 1fr; } .login-shell { grid-template-columns: 1fr; } .brand-panel { min-height: 430px; padding: 28px 24px; } .brand-panel__content { margin: 0; padding: 38px 0 28px; } .brand-mark-wrap { margin-top: 42px; width: 106px; border-radius: 22px; padding: 8px; } .brand-mark { border-radius: 16px; } .brand-kicker { margin-top: 18px; } .brand-panel h1 { font-size: clamp(32px, 9vw, 52px); } .brand-copy { margin-top: 17px; max-width: 350px; font-size: 13px; } .brand-rule { margin-top: 20px; } .form-panel { min-height: auto; padding: 28px 24px 22px; } .form-column { padding: 72px 0 74px; } }
+@media (max-width: 860px) { .storage-content { padding-top: 54px; } .storage-grid { grid-template-columns: 1fr; } .login-shell { grid-template-columns: 1fr; } .brand-panel { min-height: 430px; padding: 28px 24px; } .brand-panel__lockup { margin: 0; padding: 24px 20px; } .brand-panel__identity { gap: 16px; } .brand-panel__logo { width: 92px; border-radius: 20px; } .brand-panel__wordmark { font-size: clamp(38px, 11vw, 62px); } .brand-panel__slogan { font-size: clamp(17px, 4vw, 23px); } .form-panel { min-height: auto; padding: 28px 24px 22px; } .form-column { padding: 72px 0 74px; } }
 @media (max-width: 480px) { .reset-dialog { padding: 31px 22px 25px; } .reset-dialog h2 { font-size: 26px; } .brand-panel { min-height: 420px; } .brand-chip { font-size: 9px; } .brand-panel__footer, .form-panel__bottom { font-size: 9px; } .secure-label { font-size: 9px; } .form-panel__topbar { align-items: flex-start; } .form-panel__top-actions { gap: 10px; } .secure-label { font-size: 9px; } .form-column { padding-top: 58px; } }
