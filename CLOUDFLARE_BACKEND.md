@@ -44,7 +44,7 @@ From the project root, install and build with npm, then deploy directly through 
 npm ci
 npm run check
 npm run build
-npx wrangler deploy --config wrangler.jsonc --name mmnext-auth --keep-vars
+npx wrangler deploy --config wrangler.jsonc --name auth --keep-vars
 ```
 
 ## Security notes
