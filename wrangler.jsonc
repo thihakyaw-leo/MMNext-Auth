@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mmnext-auth",
+  "main": "./worker.ts",
   "compatibility_date": "2026-09-07",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
@@ -9,5 +10,25 @@
   "assets": {
     "directory": "./dist/public",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mmnext-auth-db",
+      "database_id": "0d6a9e06-a8aa-4fff-97d9-a1fb2ea44550",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "012abbdc8df345e3835b2e538cd5132c"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "mmnext-pos-files"
+    }
+  ]
 }

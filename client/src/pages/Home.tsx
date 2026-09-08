@@ -5,9 +5,10 @@ import { toast } from "sonner";
 import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/lib/auth";
 
-const suppliedLogo = "/manus-storage/mmnext-supplied-logo_4f4e03b5.webp";
-const panelArt = "/manus-storage/mmnext-monywa-standing-buddha_94e9aef3.png";
-const motif = "/manus-storage/mmnext-brand-motif_e8d3fa56.png";
+const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
+const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
+const panelArt = `${R2_ASSET_BASE}/mmnext-app-icon.png?v=4x-20260908`;
+const motif = `${R2_ASSET_BASE}/mmnext-app-icon.png?v=4x-20260908`;
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);

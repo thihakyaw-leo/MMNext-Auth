@@ -88,7 +88,7 @@ button { border: 0; }
 .login-shell { min-height: 100svh; display: grid; grid-template-columns: minmax(390px, 0.92fr) minmax(520px, 1.08fr); background: #f5f2e9; }
 .brand-panel { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 72px); color: #f6fbf6; background: #1b4332; isolation: isolate; }
 .brand-panel::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 85% 10%, rgba(108,214,138,.25), transparent 30%), linear-gradient(145deg, #0d3225 0%, #1b4332 52%, #125032 100%); }
-.brand-panel__texture { position: absolute; inset: 0; z-index: -1; opacity: .27; background-image: url("/manus-storage/mmnext-login-texture_c8a458d4.png"); background-size: cover; background-position: center; mix-blend-mode: screen; }
+.brand-panel__texture { position: absolute; inset: 0; z-index: -1; opacity: .34; background-image: linear-gradient(135deg, rgba(7,43,31,.52), rgba(27,67,50,.08)), url("https://cloud.kaungthant.shop/mmnext-auth/mmnext-monywa-background.png?v=monywa-20260908"); background-size: cover; background-position: center; mix-blend-mode: screen; }
 .brand-panel__art { position: absolute; z-index: -1; width: min(73%, 490px); right: -4%; bottom: 9%; opacity: .55; mix-blend-mode: screen; filter: saturate(.8) contrast(1.05); }
 .brand-panel__content { position: relative; max-width: 530px; margin: auto 0; padding: 5vh 0 4vh; }
 .brand-chip { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(231,245,229,.24); background: rgba(5,34,24,.27); border-radius: 999px; padding: 8px 13px; color: #e4f1e5; font-size: 11px; font-weight: 600; letter-spacing: .105em; text-transform: uppercase; }

@@ -1,7 +1,33 @@
 import type { Express } from "express";
 import { ENV } from "./env";
+import { getCloudflareEnv } from "./cloudflare";
+
+function registerR2Proxy(app: Express) {
+  app.get("/storage/*", async (req, res) => {
+    const bucket = getCloudflareEnv()?.FILES;
+    const encodedKey = (req.params as Record<string, string>)[0];
+    if (!bucket || !encodedKey) return;
+    try {
+      const object = await bucket.get(decodeURIComponent(encodedKey));
+      if (!object) {
+        res.status(404).send("File not found");
+        return;
+      }
+      if (object.httpMetadata?.contentType) res.type(object.httpMetadata.contentType);
+      res.set("Cache-Control", "private, max-age=3600");
+      res.status(200);
+      object.body.pipeTo(new WritableStream({ write: chunk => { res.write(Buffer.from(chunk)); } }))
+        .then(() => res.end())
+        .catch(() => { if (!res.headersSent) res.status(502); res.end("Storage proxy error"); });
+    } catch (error) {
+      console.error("[R2Proxy] failed:", error);
+      res.status(502).send("Storage backend error");
+    }
+  });
+}
 
 export function registerStorageProxy(app: Express) {
+  registerR2Proxy(app);
   app.get("/manus-storage/*", async (req, res) => {
     const key = (req.params as Record<string, string>)[0];
     if (!key) {
