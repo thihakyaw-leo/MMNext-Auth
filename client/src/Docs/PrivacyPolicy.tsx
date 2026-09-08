@@ -3,7 +3,7 @@ import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 
-const logo = "https://cloud.kaungthant.shop/mmnext-auth/mmnext-pos-logo.png?v=4x-20260908";
+const logo = "/assets/mmnext-pos-logo.png";
 
 export default function PrivacyPolicy() {
   const [language, setLanguage] = useState<"my" | "en">("my");

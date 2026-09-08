@@ -5,8 +5,7 @@ import { toast } from "sonner";
 import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/Auth/auth";
 
-const R2_ASSET_BASE = "https://cloud.kaungthant.shop/mmnext-auth";
-const suppliedLogo = `${R2_ASSET_BASE}/mmnext-pos-logo.png?v=4x-20260908`;
+const suppliedLogo = "/assets/mmnext-pos-logo.png";
 
 type Language = "my" | "en";
 const copy = {

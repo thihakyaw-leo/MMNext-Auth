@@ -2,7 +2,7 @@ import { BookOpen, CheckCircle2, Database, FileImage, Globe2, ShieldCheck } from
 import { useState } from "react";
 import { Link } from "wouter";
 
-const logo = "https://cloud.kaungthant.shop/mmnext-auth/mmnext-pos-logo.png?v=4x-20260908";
+const logo = "/assets/mmnext-pos-logo.png";
 type Language = "my" | "en";
 
 const content = {
