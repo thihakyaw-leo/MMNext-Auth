@@ -18,7 +18,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm ci --legacy-peer-deps
+            - npm ci
             - npm run build
             - npx wrangler@latest pages deploy dist/public --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main --config wrangler.pages.toml
           artifacts:
@@ -31,6 +31,6 @@ pipelines:
           caches:
             - node
           script:
-            - npm ci --legacy-peer-deps
+            - npm ci
             - npm run check
             - npm run build
