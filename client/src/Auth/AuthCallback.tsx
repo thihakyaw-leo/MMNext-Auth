@@ -22,7 +22,7 @@ export default function AuthCallback() {
         <p className="form-eyebrow">MMNext Auth</p>
         <h1>{status === "loading" ? "Securing your workspace…" : status === "success" ? "You are signed in" : "We could not verify this sign in"}</h1>
         <p>{status === "loading" ? "Please wait while we finish connecting your POS workspace." : status === "success" ? "Your session is ready. You can continue to the POS dashboard." : "The sign-in link may have expired. Please return to the login page and try again."}</p>
-        {status !== "loading" && <Link href="/" className="callback-link">Return to sign in</Link>}
+        {status !== "loading" && <Link href="/login" className="callback-link">Return to sign in</Link>}
       </div>
     </main>
   );

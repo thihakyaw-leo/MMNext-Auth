@@ -59,7 +59,7 @@ export default function FileStorage() {
   return (
     <main className="storage-shell">
       <header className="storage-header">
-        <Link href="/" className="policy-back"><ArrowLeft size={16} /> Back to sign in</Link>
+        <Link href="/login" className="policy-back"><ArrowLeft size={16} /> Back to sign in</Link>
         <div className="policy-brand"><span className="policy-brand-mark">M</span> MMNext <b>POS</b></div>
       </header>
       <section className="storage-content">

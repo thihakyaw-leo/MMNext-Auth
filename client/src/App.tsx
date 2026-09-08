@@ -16,7 +16,7 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={Docs} />
       <Route path="/files" component={FileStorage} />
       <Route path="/login" component={Home} />
       <Route path="/register" component={Register} />

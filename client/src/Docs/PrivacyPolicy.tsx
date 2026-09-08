@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
   ];
   return <main className="policy-shell">
     <header className="policy-header">
-      <Link href="/" className="policy-back"><ArrowLeft size={16} /> {my ? "ဝင်ရောက်ရန် ပြန်သွားမည်" : "Back to sign in"}</Link>
+      <Link href="/login" className="policy-back"><ArrowLeft size={16} /> {my ? "ဝင်ရောက်ရန် ပြန်သွားမည်" : "Back to sign in"}</Link>
       <div className="policy-header-actions"><div className="policy-brand"><img src={logo} alt="MMNext POS" /> <span>MMNext <b>POS</b></span></div><div className="language-switch" role="group" aria-label={my ? "ဘာသာစကား" : "Language"}><button type="button" className={my ? "active" : ""} aria-pressed={my} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={!my ? "active" : ""} aria-pressed={!my} onClick={() => setLanguage("en")}>EN</button></div></div>
     </header>
     <article className="policy-content">

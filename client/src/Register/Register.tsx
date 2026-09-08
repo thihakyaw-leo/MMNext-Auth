@@ -54,7 +54,7 @@ export default function Register() {
       <div className="brand-panel__footer"><span>MMNext POS</span><span className="footer-divider" /><span>Built for business</span></div>
     </section>
     <section className="register-form-panel" aria-label={t.title}>
-      <div className="register-topbar"><Link href="/" className="register-back"><ArrowLeft size={15} /> {language === "my" ? "ဝင်ရောက်ရန်" : "Back to sign in"}</Link><div className="language-switch" role="group" aria-label={t.language}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
+      <div className="register-topbar"><Link href="/login" className="register-back"><ArrowLeft size={15} /> {language === "my" ? "ဝင်ရောက်ရန်" : "Back to sign in"}</Link><div className="language-switch" role="group" aria-label={t.language}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
       <div className="register-column">
         <div className="register-header"><div className="register-eyebrow"><ShieldCheck size={14} /> {t.secure}</div><h1>{t.title}</h1><p>{t.intro}</p></div>
         <form className="register-form" onSubmit={handleSubmit}>
@@ -66,7 +66,7 @@ export default function Register() {
           <label className="register-consent"><input type="checkbox" checked={accepted} onChange={(event) => setAccepted(event.target.checked)} /><span>{t.agree} <Link href="/terms">{t.terms}</Link> {t.and} <Link href="/privacy">{t.privacy}</Link>.</span></label>
           <button className="submit-button" type="submit" disabled={isSubmitting}><span>{isSubmitting ? t.creating : t.create}</span>{isSubmitting ? <span className="button-spinner" /> : <ArrowRight size={18} />}</button>
         </form>
-        <p className="register-signin">{t.haveAccount} <Link href="/">{t.signIn}</Link></p>
+        <p className="register-signin">{t.haveAccount} <Link href="/login">{t.signIn}</Link></p>
       </div>
       <div className="form-panel__bottom"><span>© 2026 MMNext POS</span><span>MMNext Auth</span></div>
     </section>
