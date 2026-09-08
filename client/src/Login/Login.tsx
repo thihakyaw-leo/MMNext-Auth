@@ -1,6 +1,6 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
 import { useEffect, useState } from "react";
-import { ArrowRight, CloudUpload, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery } from "@/Auth/auth";
@@ -15,7 +15,6 @@ const copy = {
     sloganLine1: "အရောင်းတစ်ချက်၊ စာရင်းတစ်ချက် —",
     sloganLine2: "လုပ်ငန်းတစ်ခုလုံးကို MMNext-POS နဲ့ ထိန်းချုပ်",
     docs: "အသုံးပြုလမ်းညွှန်",
-    files: "ဖိုင်များ",
     secure: "လုံခြုံသော workspace",
     welcome: "ပြန်လည်ကြိုဆိုပါတယ်",
     signInTitle: "သင့် workspace သို့ ဝင်ရောက်ပါ",
@@ -49,7 +48,6 @@ const copy = {
     sloganLine1: "One sale, one record —",
     sloganLine2: "control your whole business with MMNext-POS",
     docs: "Docs",
-    files: "Files",
     secure: "Secure workspace",
     welcome: "Welcome back",
     signInTitle: "Sign in to your workspace",
@@ -151,7 +149,7 @@ export default function Home() {
             <img src={suppliedLogo} alt="MMNext POS" />
             <span>MMNext <b>POS</b></span>
           </div>
-          <div className="form-panel__top-actions"><Link href="/docs" className="storage-nav-link">{t.docs}</Link><Link href="/files" className="storage-nav-link"><CloudUpload size={15} /> {t.files}</Link><span className="secure-label"><ShieldCheck size={15} /> {t.secure}</span><div className="language-switch" role="group" aria-label={t.languageLabel}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
+          <div className="form-panel__top-actions"><Link href="/docs" className="storage-nav-link">{t.docs}</Link><span className="secure-label"><ShieldCheck size={15} /> {t.secure}</span><div className="language-switch" role="group" aria-label={t.languageLabel}><button type="button" className={language === "my" ? "active" : ""} aria-pressed={language === "my"} onClick={() => setLanguage("my")}>မြန်မာ</button><button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button></div></div>
         </div>
 
         <div className="form-column">
