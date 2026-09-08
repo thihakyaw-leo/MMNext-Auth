@@ -11,10 +11,10 @@
 - [x] Add explicit list-query error state to the File Storage page.
 - [x] Browser-test the File Storage upload and failure states after the safer encoding fix.
 
-- [ ] Verify the target GitHub remote, current branch, and working tree before pushing.
-- [ ] Confirm secrets and generated files are excluded from the commit.
-- [ ] Commit the current MMNext POS full-stack project and push it to the requested repository.
-- [ ] Verify the remote branch and report the push result.
+- [x] Verify the target GitHub remote, current branch, and working tree before pushing.
+- [x] Confirm secrets and generated files are excluded from the commit.
+- [x] Commit the current MMNext POS full-stack project and push it to the requested repository.
+- [x] Verify the remote branch and report the push result.
 - [x] Confirm whether to push the POS app to a new branch or replace/merge the existing Auth Server main branch.
 
 - [x] Confirm Cloudflare build/runtime requirements for the full-stack project.
