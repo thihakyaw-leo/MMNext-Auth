@@ -18,10 +18,8 @@ pipelines:
           caches:
             - node
           script:
-            - corepack enable
-            - corepack prepare pnpm@10.4.1 --activate
-            - pnpm install --frozen-lockfile
-            - pnpm build
+            - npm ci --legacy-peer-deps
+            - npm run build
             - npx wrangler@latest pages deploy dist/public --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main --config wrangler.pages.toml
           artifacts:
             - dist/**
@@ -33,8 +31,6 @@ pipelines:
           caches:
             - node
           script:
-            - corepack enable
-            - corepack prepare pnpm@10.4.1 --activate
-            - pnpm install --frozen-lockfile
-            - pnpm check
-            - pnpm build
+            - npm ci --legacy-peer-deps
+            - npm run check
+            - npm run build

@@ -60,7 +60,7 @@ Cloudflare’s Git integration supports GitHub repositories and can automaticall
 |---|---|
 | Framework preset | React (Vite) or None |
 | Root directory | `/` |
-| Build command | `pnpm build` |
+| Build command | `npm run build` |
 | Build output directory | `dist/public` |
 | Production branch | `main` |
 | Node version | `22` |

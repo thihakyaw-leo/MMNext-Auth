@@ -23,9 +23,9 @@ For a Pages deployment, the same bindings must also be attached to the Pages pro
 ## D1 setup
 
 ```bash
-pnpm wrangler d1 migrations apply MMNEXT_DB --local
-pnpm wrangler d1 migrations apply MMNEXT_DB --remote
-pnpm wrangler types
+npx wrangler d1 migrations apply MMNEXT_DB --local
+npx wrangler d1 migrations apply MMNEXT_DB --remote
+npx wrangler types
 ```
 
 The SQL migration is in `migrations/0001_cloudflare_d1.sql`. It creates `users`, `stored_files`, and the owner/created-time index. Do not apply the migration to a production database until the selected D1 database has been backed up or verified as the intended target.

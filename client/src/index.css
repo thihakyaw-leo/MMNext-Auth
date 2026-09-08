@@ -89,7 +89,7 @@ button { border: 0; }
 .brand-panel { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 72px); color: #f6fbf6; background: #1b4332; isolation: isolate; }
 .brand-panel::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 85% 10%, rgba(108,214,138,.25), transparent 30%), linear-gradient(145deg, #0d3225 0%, #1b4332 52%, #125032 100%); }
 .brand-panel__texture { position: absolute; inset: 0; z-index: -1; opacity: .34; background-image: linear-gradient(135deg, rgba(7,43,31,.52), rgba(27,67,50,.08)), url("https://cloud.kaungthant.shop/mmnext-auth/mmnext-monywa-background.png?v=monywa-20260908"); background-size: cover; background-position: center; mix-blend-mode: screen; }
-.brand-panel__lockup { position: relative; z-index: 1; width: min(100%, 610px); margin: auto 0; padding: clamp(24px, 4vw, 48px) clamp(20px, 4vw, 54px); border: 1px solid rgba(231,245,229,.2); border-radius: 28px; background: linear-gradient(145deg, rgba(4,34,24,.72), rgba(8,57,39,.42)); box-shadow: 0 24px 70px rgba(2,25,16,.24); backdrop-filter: blur(3px); }
+.brand-panel__lockup { position: relative; z-index: 1; width: min(100%, 610px); margin: auto 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
 .brand-chip { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(231,245,229,.24); background: rgba(5,34,24,.45); border-radius: 999px; padding: 8px 13px; color: #e4f1e5; font-size: 11px; font-weight: 600; letter-spacing: .105em; text-transform: uppercase; }
 .brand-chip__dot { width: 7px; height: 7px; border-radius: 50%; background: #6cd68a; box-shadow: 0 0 0 4px rgba(108,214,138,.15); }
 .brand-panel__identity { display: flex; align-items: center; gap: clamp(16px, 3vw, 32px); margin-top: 30px; }
@@ -153,9 +153,11 @@ button { border: 0; }
 
 .policy-shell { min-height: 100svh; background: #f5f2e9; color: #1f2e28; }
 .policy-header { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: 0 auto; padding: 28px 28px 20px; }
+.policy-header-actions { display: inline-flex; align-items: center; gap: 18px; }
 .policy-back { display: inline-flex; align-items: center; gap: 8px; color: #527064; font-size: 12px; font-weight: 600; text-decoration: none; }
 .policy-back:hover { color: #1b4332; }
-.policy-brand { display: inline-flex; align-items: center; gap: 7px; color: #1b4332; font-size: 15px; letter-spacing: -.02em; }
+.policy-brand { display: inline-flex; align-items: center; gap: 8px; color: #1b4332; font-size: 15px; letter-spacing: -.02em; }
+.policy-brand img { width: 34px; height: 34px; object-fit: cover; border-radius: 9px; background: #fff8e8; }
 .policy-brand b { color: #2daa44; font-weight: 600; }
 .policy-brand-mark { display: inline-grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; background: #1b4332; color: #8be39f; font-size: 13px; font-weight: 700; }
 .policy-content { max-width: 780px; margin: 0 auto; padding: 72px 28px 100px; }
