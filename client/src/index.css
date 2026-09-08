@@ -115,6 +115,10 @@ button { border: 0; }
 .storage-nav-link:hover { color: #1b4332; }
 .secure-label { display: inline-flex; align-items: center; gap: 7px; color: #6a786f; font-size: 11px; letter-spacing: .04em; }
 .secure-label svg { color: #2daa44; }
+.language-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid #dfe5da; border-radius: 999px; background: #f4f7ef; }
+.language-switch button { padding: 5px 8px; border-radius: 999px; background: transparent; color: #728078; cursor: pointer; font-size: 10px; font-weight: 700; line-height: 1; }
+.language-switch button.active { background: #1b4332; color: #f8fff7; box-shadow: 0 2px 6px rgba(27,67,50,.18); }
+.language-switch button:focus-visible { outline: 2px solid #5ebc7e; outline-offset: 2px; }
 .form-column { width: min(100%, 460px); margin: auto; padding: 7vh 0 5vh; }
 .form-eyebrow { display: inline-flex; align-items: center; gap: 7px; color: #2d9a4b; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
 .form-eyebrow svg { color: #cdaa52; }
