@@ -12,6 +12,4 @@ export const ENV = {
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
   githubClientId: process.env.GITHUB_CLIENT_ID ?? "",
   githubClientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
-  microsoftClientId: process.env.MICROSOFT_CLIENT_ID ?? "",
-  microsoftClientSecret: process.env.MICROSOFT_CLIENT_SECRET ?? "",
 };

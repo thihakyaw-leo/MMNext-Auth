@@ -1,7 +1,7 @@
 /* Green Ledger direction: the public-client handoff uses PKCE and keeps tokens out of the URL after callback. */
 
 type Credentials = { email: string; password: string };
-type AuthProvider = "password" | "google" | "github" | "microsoft";
+type AuthProvider = "password" | "google" | "github";
 
 const AUTH_SERVER_URL = (import.meta.env.VITE_AUTH_SERVER_URL || "https://auth.mmnext.app").replace(/\/$/, "");
 const CLIENT_ID = import.meta.env.VITE_MMNEXT_CLIENT_ID || "mmnext-pos-web";
