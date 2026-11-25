@@ -39,8 +39,10 @@ const copy = {
     validEmail: "မှန်ကန်သော အီးမေးလ်လိပ်စာကို ထည့်ပါ။",
     emailPassword: "အီးမေးလ်နှင့် စကားဝှက်ကို ထည့်ပါ။",
     recoveryError: "အီးမေးလ် recovery စတင်၍ မရပါ။ ထပ်မံကြိုးစားပါ။",
-    signInError: "ဝင်ရောက်၍ မရပါ။ Auth Server URL ကို စစ်ဆေးပါ။",
+        signInError: "ဝင်ရောက်ရန် မရပါ။ Auth Server URL ကို စစ်ဆေးပါ။",
     askAdmin: "သင့်လုပ်ငန်းစီမံခန့်ခွဲသူထံမှ invite တောင်းပါ။",
+        or: "သို့မဟုတ်",
+        continueWith: "ဆက်လက်လုပ်ဆောင်ရန်",
   },
   en: {
     languageLabel: "Language",

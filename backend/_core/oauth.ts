@@ -51,10 +51,10 @@ export function registerOAuthRoutes(app: Express) {
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
 
-      // Extract provider from state or userInfo
-      const provider = (userInfo.provider as string) || (userInfo.platform as string) || "mmnext";
+            // Extract provider from userInfo (platform or loginMethod)
+            const provider = userInfo.loginMethod || userInfo.platform || "mmnext";
 
-      const normalized = normalizeUserInfo(userInfo as Record<string, unknown>, provider);
+      const normalized = normalizeUserInfo(userInfo as unknown as Record<string, unknown>, provider);
 
       if (!normalized.openId) {
         res.status(400).json({ error: "openId missing from user info" });
