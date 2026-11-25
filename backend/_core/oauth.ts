@@ -10,6 +10,22 @@ function getQueryParam(req: Request, key: string): string | undefined {
   return typeof value === "string" ? value : undefined;
 }
 
+function normalizeUserInfo(userInfo: Record<string, unknown>, provider?: string) {
+  // Normalize user info from different OAuth providers
+  const openId = (userInfo.sub as string) || (userInfo.id as string) || (userInfo.openId as string);
+  const email = (userInfo.email as string) || (userInfo.mail as string) || (userInfo.userPrincipalName as string);
+  const name = (userInfo.name as string) || (userInfo.displayName as string) || (userInfo.given_name as string) || "";
+  const picture = (userInfo.picture as string) || (userInfo.avatar_url as string) || (userInfo.photoUrl as string);
+
+  return {
+    openId: `${provider || "mmnext"}:${openId}`,
+    email: email ?? null,
+    name: name || email?.split("@")[0] || "User",
+    loginMethod: provider || "mmnext",
+    picture: picture ?? null,
+  };
+}
+
 export function registerOAuthRoutes(app: Express) {
   app.get("/api/oauth/callback", async (req: Request, res: Response) => {
     const code = getQueryParam(req, "code");
@@ -35,21 +51,26 @@ export function registerOAuthRoutes(app: Express) {
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
 
-      if (!userInfo.openId) {
+      // Extract provider from state or userInfo
+      const provider = (userInfo.provider as string) || (userInfo.platform as string) || "mmnext";
+
+      const normalized = normalizeUserInfo(userInfo as Record<string, unknown>, provider);
+
+      if (!normalized.openId) {
         res.status(400).json({ error: "openId missing from user info" });
         return;
       }
 
       await db.upsertUser({
-        openId: userInfo.openId,
-        name: userInfo.name || null,
-        email: userInfo.email ?? null,
-        loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
+        openId: normalized.openId,
+        name: normalized.name,
+        email: normalized.email,
+        loginMethod: normalized.loginMethod,
         lastSignedIn: new Date(),
       });
 
-      const sessionToken = await sdk.createSessionToken(userInfo.openId, {
-        name: userInfo.name || "",
+      const sessionToken = await sdk.createSessionToken(normalized.openId, {
+        name: normalized.name,
         expiresInMs: ONE_YEAR_MS,
       });
 
