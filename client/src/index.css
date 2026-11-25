@@ -146,6 +146,14 @@ button { border: 0; }
 .button-spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.32); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
 .form-divider { display: flex; align-items: center; gap: 13px; margin: 32px 0 18px; color: #9aa49d; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
 .form-divider::before, .form-divider::after { content: ""; height: 1px; flex: 1; background: #e4e7df; }
+.social-divider { display: flex; align-items: center; gap: 13px; margin: 24px 0; color: #9aa49d; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.social-divider::before, .social-divider::after { content: ""; height: 1px; flex: 1; background: #e4e7df; }
+.social-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.social-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 46px; padding: 0 14px; border: 1px solid #dfe2d8; border-radius: 11px; background: rgba(255,255,255,.7); color: #36493f; cursor: pointer; font-size: 13px; font-weight: 500; transition: border-color 160ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease; }
+.social-button:hover:not(:disabled) { border-color: #b7d3bc; background: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(27,67,50,.08); }
+.social-button:active:not(:disabled) { transform: scale(.98); }
+.social-button:disabled { cursor: wait; opacity: .6; }
+.social-button svg { flex: 0 0 auto; color: #1b4332; }
 .help-copy { margin: 0; color: #7c877f; font-size: 12px; text-align: center; }
 .form-panel__bottom { color: #9aa39c; }
 .register-shell { min-height: 100svh; display: grid; grid-template-columns: minmax(390px, .92fr) minmax(520px, 1.08fr); background: #f5f2e9; }

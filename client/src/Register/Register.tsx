@@ -1,18 +1,26 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Building2, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, UserRound, Chrome, Github, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
-import { beginRegistration } from "@/Auth/auth";
+import { beginRegistration, beginSocialAuth } from "@/Auth/auth";
 
 const suppliedLogo = "/assets/mmnext-pos-logo.png";
 
 type Language = "my" | "en";
+type AuthProvider = "google" | "github" | "microsoft";
+
 const copy = {
   my: {
-    chip: "Myanmar Business Style", title: "လုပ်ငန်းအကောင့် ဖန်တီးပါ", intro: "MMNext POS ဖြင့် အရောင်း၊ စာရင်းနှင့် သင့်လုပ်ငန်းတစ်ခုလုံးကို တစ်နေရာတည်းမှ စီမံပါ။", fullName: "အမည်အပြည့်အစုံ", business: "လုပ်ငန်းအမည်", email: "အီးမေးလ်လိပ်စာ", password: "စကားဝှက်", confirm: "စကားဝှက် ထပ်မံထည့်ပါ", create: "အကောင့်ဖန်တီးမည်", creating: "အကောင့်ဖန်တီးရန် ချိတ်ဆက်နေသည်…", haveAccount: "အကောင့်ရှိပြီးသားလား?", signIn: "ဝင်ရောက်မည်", agree: "MMNext POS ၏", terms: "စည်းမျဉ်းများ", privacy: "ကိုယ်ရေးအချက်အလက်မူဝါဒ", and: "နှင့်", language: "ဘာသာစကား", required: "လိုအပ်သောအချက်အလက်များကို ဖြည့်ပါ။", mismatch: "စကားဝှက်နှစ်ခု တူညီရပါမည်။", short: "စကားဝှက်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။", consent: "ဆက်လက်လုပ်ဆောင်ရန် စည်းမျဉ်းများကို သဘောတူပါ။", failed: "အကောင့်ဖန်တီးမှု မစတင်နိုင်ပါ။ ထပ်မံကြိုးစားပါ။", secure: "လုံခြုံသော signup flow ဖြင့် ကာကွယ်ထားသည်" },
+    chip: "Myanmar Business Style", title: "လုပ်ငန်းအကောင့် ဖန်တီးပါ", intro: "MMNext POS ဖြင့် အရောင်း၊ စာရင်းနှင့် သင့်လုပ်ငန်းတစ်ခုလုံးကို တစ်နေရာတည်းမှ စီမံပါ။", fullName: "အမည်အပြည့်အစုံ", business: "လုပ်ငန်းအမည်", email: "အီးမေးလ်လိပ်စာ", password: "စကားဝှက်", confirm: "စကားဝှက် ထပ်မံထည့်ပါ", create: "အကောင့်ဖန်တီးမည်", creating: "အကောင့်ဖန်တီးရန် ချိတ်ဆက်နေသည်…", haveAccount: "အကောင့်ရှိပြီးသားလား?", signIn: "ဝင်ရောက်မည်", agree: "MMNext POS ၏", terms: "စည်းမျဉ်းများ", privacy: "ကိုယ်ရေးအချက်အလက်မူဝါဒ", and: "နှင့်", language: "ဘာသာစကား", required: "လိုအပ်သောအချက်အလက်များကို ဖြည့်ပါ။", mismatch: "စကားဝှက်နှစ်ခု တူညီရပါမည်။", short: "စကားဝှက်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။", consent: "ဆက်လက်လုပ်ဆောင်ရန် စည်းမျဉ်းများကို သဘောတူပါ။", failed: "အကောင့်ဖန်တီးမှု မစတင်နိုင်ပါ။ ထပ်မံကြိုးစားပါ။", secure: "လုံခြုံသော signup flow ဖြင့် ကာကွယ်ထားသည်", or: "သို့မဟုတ်", continueWith: "ဆက်လက်လုပ်ဆောင်ရန်" },
   en: {
-    chip: "Myanmar Business Style", title: "Create your business account", intro: "Bring sales, records, and your whole business together in one calm workspace with MMNext POS.", fullName: "Full name", business: "Business name", email: "Email address", password: "Password", confirm: "Confirm password", create: "Create account", creating: "Opening secure signup…", haveAccount: "Already have an account?", signIn: "Sign in", agree: "I agree to the MMNext POS", terms: "Terms of Service", privacy: "Privacy Policy", and: "and", language: "Language", required: "Please complete all required fields.", mismatch: "The passwords must match.", short: "Password must be at least 8 characters.", consent: "Please accept the terms to continue.", failed: "We could not start registration. Please try again.", secure: "Protected by a secure signup flow" },
+    chip: "Myanmar Business Style", title: "Create your business account", intro: "Bring sales, records, and your whole business together in one calm workspace with MMNext POS.", fullName: "Full name", business: "Business name", email: "Email address", password: "Password", confirm: "Confirm password", create: "Create account", creating: "Opening secure signup…", haveAccount: "Already have an account?", signIn: "Sign in", agree: "I agree to the MMNext POS", terms: "Terms of Service", privacy: "Privacy Policy", and: "and", language: "Language", required: "Please complete all required fields.", mismatch: "The passwords must match.", short: "Password must be at least 8 characters.", consent: "Please accept the terms to continue.", failed: "We could not start registration. Please try again.", secure: "Protected by a secure signup flow", or: "or", continueWith: "Continue with" },
 } as const;
+
+const socialProviders: { id: AuthProvider; label: string; icon: React.ReactNode }[] = [
+  { id: "google", label: "Google", icon: <Chrome size={18} /> },
+  { id: "github", label: "GitHub", icon: <Github size={18} /> },
+  { id: "microsoft", label: "Microsoft", icon: <Globe size={18} /> },
+];
 
 export default function Register() {
   const [language, setLanguage] = useState<Language>("my");
@@ -66,6 +74,21 @@ export default function Register() {
           <label className="register-consent"><input type="checkbox" checked={accepted} onChange={(event) => setAccepted(event.target.checked)} /><span>{t.agree} <Link href="/terms">{t.terms}</Link> {t.and} <Link href="/privacy">{t.privacy}</Link>.</span></label>
           <button className="submit-button" type="submit" disabled={isSubmitting}><span>{isSubmitting ? t.creating : t.create}</span>{isSubmitting ? <span className="button-spinner" /> : <ArrowRight size={18} />}</button>
         </form>
+                  <div className="social-divider" role="separator" aria-label={t.or}><span>{t.or}</span></div>
+                  <div className="social-buttons" role="group" aria-label={t.continueWith}>
+                    {socialProviders.map((provider) => (
+                      <button
+                        key={provider.id}
+                        type="button"
+                        className="social-button"
+                        onClick={() => beginSocialAuth(provider.id)}
+                        aria-label={`${t.continueWith} ${provider.label}`}
+                      >
+                        {provider.icon}
+                        <span>{provider.label}</span>
+                      </button>
+                    ))}
+                  </div>
         <p className="register-signin">{t.haveAccount} <Link href="/login">{t.signIn}</Link></p>
       </div>
       <div className="form-panel__bottom"><span>© 2026 MMNext POS</span><span>MMNext Auth</span></div>

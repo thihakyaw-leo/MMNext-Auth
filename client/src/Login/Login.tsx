@@ -1,9 +1,9 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
 import { useEffect, useState } from "react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X, Chrome, Github, Globe } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
-import { beginAuth, beginEmailRecovery } from "@/Auth/auth";
+import { beginAuth, beginEmailRecovery, beginSocialAuth } from "@/Auth/auth";
 
 const suppliedLogo = "/assets/mmnext-pos-logo.png";
 
@@ -39,8 +39,10 @@ const copy = {
     validEmail: "မှန်ကန်သော အီးမေးလ်လိပ်စာကို ထည့်ပါ။",
     emailPassword: "အီးမေးလ်နှင့် စကားဝှက်ကို ထည့်ပါ။",
     recoveryError: "အီးမေးလ် recovery စတင်၍ မရပါ။ ထပ်မံကြိုးစားပါ။",
-    signInError: "ဝင်ရောက်၍ မရပါ။ Auth Server URL ကို စစ်ဆေးပါ။",
+        signInError: "ဝင်ရောက်ရန် မရပါ။ Auth Server URL ကို စစ်ဆေးပါ။",
     askAdmin: "သင့်လုပ်ငန်းစီမံခန့်ခွဲသူထံမှ invite တောင်းပါ။",
+        or: "သို့မဟုတ်",
+        continueWith: "ဆက်လက်လုပ်ဆောင်ရန်",
   },
   en: {
     languageLabel: "Language",
@@ -74,8 +76,18 @@ const copy = {
     recoveryError: "We could not start email recovery. Please try again.",
     signInError: "We could not start sign in. Please check your Auth Server URL.",
     askAdmin: "Ask your business administrator to invite you.",
+        or: "or",
+        continueWith: "Continue with",
   },
 } as const;
+
+    type AuthProvider = "google" | "github" | "microsoft";
+
+    const socialProviders: { id: AuthProvider; label: string; icon: React.ReactNode }[] = [
+      { id: "google", label: "Google", icon: <Chrome size={18} /> },
+      { id: "github", label: "GitHub", icon: <Github size={18} /> },
+          { id: "microsoft", label: "Microsoft", icon: <Globe size={18} /> },
+    ];
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("my");
@@ -183,6 +195,22 @@ export default function Home() {
               <span>{isSubmitting ? t.connecting : t.continue}</span>
               {isSubmitting ? <span className="button-spinner" /> : <ArrowRight size={18} />}
             </button>
+
+                        <div className="social-divider"><span>{t.or}</span></div>
+                        <div className="social-buttons" role="group" aria-label={t.continueWith}>
+                          {socialProviders.map((provider) => (
+                            <button
+                              key={provider.id}
+                              type="button"
+                              className="social-button"
+                              onClick={() => beginSocialAuth(provider.id, email || undefined)}
+                              disabled={isSubmitting}
+                            >
+                              {provider.icon}
+                              <span>{provider.label}</span>
+                            </button>
+                          ))}
+                        </div>
           </form>
 
           <div className="form-divider"><span>{t.protected}</span></div>

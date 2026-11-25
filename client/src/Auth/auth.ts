@@ -1,6 +1,7 @@
 /* Green Ledger direction: the public-client handoff uses PKCE and keeps tokens out of the URL after callback. */
 
 type Credentials = { email: string; password: string };
+type AuthProvider = "password" | "google" | "github" | "microsoft";
 
 const AUTH_SERVER_URL = (import.meta.env.VITE_AUTH_SERVER_URL || "https://auth.mmnext.app").replace(/\/$/, "");
 const CLIENT_ID = import.meta.env.VITE_MMNEXT_CLIENT_ID || "mmnext-pos-web";
@@ -20,7 +21,11 @@ async function createChallenge(verifier: string) {
   return toBase64Url(digest);
 }
 
-export async function beginAuth({ email }: Credentials) {
+async function startAuthFlow(params: URLSearchParams) {
+  window.location.assign(`${AUTH_SERVER_URL}/authorize?${params.toString()}`);
+}
+
+export async function beginAuth({ email, provider = "password" }: Credentials & { provider?: AuthProvider }) {
   const redirectUri = import.meta.env.VITE_AUTH_REDIRECT_URI || `${window.location.origin}/auth/callback`;
   const state = crypto.randomUUID();
   const verifier = await createVerifier();
@@ -40,7 +45,38 @@ export async function beginAuth({ email }: Credentials) {
     login_hint: email,
   });
 
-  window.location.assign(`${AUTH_SERVER_URL}/authorize?${params.toString()}`);
+  if (provider !== "password") {
+    params.set("provider", provider);
+    params.set("prompt", "select_account");
+  }
+
+  await startAuthFlow(params);
+}
+
+export async function beginSocialAuth(provider: Exclude<AuthProvider, "password">, email?: string) {
+  const redirectUri = import.meta.env.VITE_AUTH_REDIRECT_URI || `${window.location.origin}/auth/callback`;
+  const state = crypto.randomUUID();
+  const verifier = await createVerifier();
+  const challenge = await createChallenge(verifier);
+  sessionStorage.setItem("mmnext_auth_state", state);
+  sessionStorage.setItem("mmnext_auth_verifier", verifier);
+  if (email) sessionStorage.setItem("mmnext_auth_email", email);
+
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    redirect_uri: redirectUri,
+    response_type: "code",
+    scope: "openid profile email",
+    state,
+    code_challenge: challenge,
+    code_challenge_method: "S256",
+    provider,
+    prompt: "select_account",
+  });
+
+  if (email) params.set("login_hint", email);
+
+  await startAuthFlow(params);
 }
 
 export async function beginRegistration({ email, fullName, businessName }: { email: string; fullName: string; businessName: string }) {
