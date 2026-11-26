@@ -8,7 +8,7 @@ This guide covers deploying the MMNext Auth System to Cloudflare:
 ## Prerequisites
 - Cloudflare account
 - GitHub repository connected to Cloudflare
-- OAuth credentials from Google, GitHub, Microsoft
+- OAuth credentials from Google, GitHub
 - MMNext-Auth server URL
 
 ---
@@ -76,8 +76,6 @@ npx wrangler secret put GOOGLE_CLIENT_ID
 npx wrangler secret put GOOGLE_CLIENT_SECRET
 npx wrangler secret put GITHUB_CLIENT_ID
 npx wrangler secret put GITHUB_CLIENT_SECRET
-npx wrangler secret put MICROSOFT_CLIENT_ID
-npx wrangler secret put MICROSOFT_CLIENT_SECRET
 
 # Optional
 npx wrangler secret put OWNER_OPEN_ID         # Admin user's openId for initial access
@@ -93,7 +91,6 @@ Update each provider's console with production callback URLs:
 |----------|--------------|
 | Google | `https://<your-worker>.workers.dev/oauth/callback/google` |
 | GitHub | `https://<your-worker>.workers.dev/oauth/callback/github` |
-| Microsoft | `https://<your-worker>.workers.dev/oauth/callback/microsoft` |
 
 Also configure in MMNext-Auth server.
 
@@ -163,8 +160,6 @@ Test the following endpoints:
 | `GOOGLE_CLIENT_SECRET` | secret | Google OAuth |
 | `GITHUB_CLIENT_ID` | secret | GitHub OAuth |
 | `GITHUB_CLIENT_SECRET` | secret | GitHub OAuth |
-| `MICROSOFT_CLIENT_ID` | secret | Microsoft OAuth |
-| `MICROSOFT_CLIENT_SECRET` | secret | Microsoft OAuth |
 | `OWNER_OPEN_ID` | secret | Admin user openId |
 
 ### Pages (Environment Variables)

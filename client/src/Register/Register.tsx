@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Building2, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, UserRound, Chrome, Github, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, UserRound, Chrome, Github } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { beginRegistration, beginSocialAuth } from "@/Auth/auth";
@@ -7,7 +7,7 @@ import { beginRegistration, beginSocialAuth } from "@/Auth/auth";
 const suppliedLogo = "/assets/mmnext-pos-logo.png";
 
 type Language = "my" | "en";
-type AuthProvider = "google" | "github" | "microsoft";
+type AuthProvider = "google" | "github";
 
 const copy = {
   my: {
@@ -19,7 +19,6 @@ const copy = {
 const socialProviders: { id: AuthProvider; label: string; icon: React.ReactNode }[] = [
   { id: "google", label: "Google", icon: <Chrome size={18} /> },
   { id: "github", label: "GitHub", icon: <Github size={18} /> },
-  { id: "microsoft", label: "Microsoft", icon: <Globe size={18} /> },
 ];
 
 export default function Register() {

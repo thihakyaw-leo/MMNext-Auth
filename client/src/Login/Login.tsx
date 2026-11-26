@@ -1,6 +1,6 @@
 /* Green Ledger direction: the login surface prioritizes operational clarity, calm trust, and restrained Myanmar-inspired detail. */
 import { useEffect, useState } from "react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X, Chrome, Github, Globe } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, ShieldCheck, Sparkles, X, Chrome, Github } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "wouter";
 import { beginAuth, beginEmailRecovery, beginSocialAuth } from "@/Auth/auth";
@@ -81,12 +81,11 @@ const copy = {
   },
 } as const;
 
-    type AuthProvider = "google" | "github" | "microsoft";
+    type AuthProvider = "google" | "github";
 
     const socialProviders: { id: AuthProvider; label: string; icon: React.ReactNode }[] = [
       { id: "google", label: "Google", icon: <Chrome size={18} /> },
       { id: "github", label: "GitHub", icon: <Github size={18} /> },
-          { id: "microsoft", label: "Microsoft", icon: <Globe size={18} /> },
     ];
 
 export default function Home() {
